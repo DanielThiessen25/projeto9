@@ -1,71 +1,59 @@
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from "react-router-dom";
 
-export default function Sessoes() {
+export default function Assentos() { 
+    const [sessao, setSessao] = useState([]);
+    const {idSessao} = useParams();
+
+    useEffect(() => {
+        const requisicao = axios.get(" https://mock-api.bootcamp.respondeai.com.br/api/v2/cineflex/showtimes/" + idSessao + "/seats");
+        alert("ENTROU NO USE EFFECT");
+        requisicao.then(resposta => {
+            console.log(resposta.data);
+            setSessao(resposta.data);
+        });
+    }, []);
+
+    function verificarCadeira(condicao){
+        if(condicao == true){
+            return("disponivel");
+        }
+        else{
+            return("indisponivel");
+        }
+    }
+
+    function mapearSala(array){
+        if(array != null){
+            return(
+            array.map(item => 
+                <div className={"cadeira "+ verificarCadeira(item.isAvailable)}>{item.name}</div>
+            )
+            );
+            }
+    }
+
     return (
         <>
             <div className="rodape">
                 <div className="caixaEscolhido">
-                    <img src="imgs/2067.png" className="posterEscolhido" />
+                    <img src={sessao.movie.posterURL} className="posterEscolhido" />
                 </div>
                 <div className="infoEscolhido">
-                    <p>Enola Holmes</p>
-                    <p>Quinta-Feira - 15:00</p>
+                    <p>{sessao.movie.title}</p>
+                    <p>{sessao.day.weekday + " - "+ sessao.name }</p>
                 </div>
             </div>
             <div className="conteudo">
                 <div className="tituloRota">Selecione o(s) assento(s)</div>
                 <div className="container">
                     <div className="mapaSala">
-                        <div className="cadeira">01</div>
-                        <div className="cadeira">02</div>
-                        <div className="cadeira">03</div>
-                        <div className="cadeira">04</div>
-                        <div className="cadeira">05</div>
-                        <div className="cadeira">06</div>
-                        <div className="cadeira">07</div>
-                        <div className="cadeira">08</div>
-                        <div className="cadeira">09</div>
-                        <div className="cadeira">10</div>
-                        <div className="cadeira">01</div>
-                        <div className="cadeira">02</div>
-                        <div className="cadeira">03</div>
-                        <div className="cadeira">04</div>
-                        <div className="cadeira">05</div>
-                        <div className="cadeira">06</div>
-                        <div className="cadeira">07</div>
-                        <div className="cadeira">08</div>
-                        <div className="cadeira">09</div>
-                        <div className="cadeira">10</div>
-                        <div className="cadeira">01</div>
-                        <div className="cadeira">02</div>
-                        <div className="cadeira">03</div>
-                        <div className="cadeira">04</div>
-                        <div className="cadeira">05</div>
-                        <div className="cadeira">06</div>
-                        <div className="cadeira">07</div>
-                        <div className="cadeira">08</div>
-                        <div className="cadeira">09</div>
-                        <div className="cadeira">10</div>
-                        <div className="cadeira">01</div>
-                        <div className="cadeira">02</div>
-                        <div className="cadeira">03</div>
-                        <div className="cadeira">04</div>
-                        <div className="cadeira">05</div>
-                        <div className="cadeira">06</div>
-                        <div className="cadeira">07</div>
-                        <div className="cadeira">08</div>
-                        <div className="cadeira">09</div>
-                        <div className="cadeira">10</div>
-                        <div className="cadeira">01</div>
-                        <div className="cadeira">02</div>
-                        <div className="cadeira">03</div>
-                        <div className="cadeira">04</div>
-                        <div className="cadeira">05</div>
-                        <div className="cadeira">06</div>
-                        <div className="cadeira">07</div>
-                        <div className="cadeira">08</div>
-                        <div className="cadeira">09</div>
-                        <div className="cadeira">10</div>
+
+                        {mapearSala(sessao.seats)}
+
+                        
                     </div>
                     <div className="legenda">
                         <div className="legendaIcone">
@@ -95,7 +83,7 @@ export default function Sessoes() {
                         <input placeholder="Digite seu cpf..." ></input>
                     </div>
 
-                    <Link to="/sucesso"><div className="botaoLaranja">Reservar assento(s)</div></Link>
+                    <Link to="/sucesso" className="botaoLaranja"><div >Reservar assento(s)</div></Link>
 
 
                 </div>

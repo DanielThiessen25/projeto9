@@ -12,8 +12,8 @@ export default function App() {
 
                 <Switch>
                     <Route path="/" exact={true} component={Home} />
-                    <Route path="/sessoes" exact={true} component={Sessoes} />
-                    <Route path="/assentos" exact={true} component={Assentos} />
+                    <Route path="/sessoes/:idFilme" exact={true} component={Sessoes} />
+                    <Route path="/assentos/:idSessao" exact={true} component={Assentos} />
                     <Route path="/sucesso" exact={true} component={Sucesso} />
                 </Switch>
 

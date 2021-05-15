@@ -1,41 +1,61 @@
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function Sessoes() {
+
+    const { idFilme } = useParams();
+
+    const [dados, setDados] = useState([]);
+
+
+    useEffect(() => {
+        const requisicao = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/cineflex/movies/" + idFilme + "/showtimes");
+        alert("ENTROU NO USE EFFECT");
+        requisicao.then(resposta => {
+            console.log(resposta.data);
+            setDados(resposta.data);
+        });
+    }, []);
+
+
+    function mapear(array) {
+        if(array != null){
+        return(
+        array.map(item => 
+            <div className="opcao">
+                <p>{item.weekday + " - " + item.date}</p>
+                <div className="horarios">
+                    {item.showtimes.map(hora =>
+                        <Link to={"/assentos/" + hora.id} className="opcaoHorario"><div>{hora.name}</div></Link>
+                        )}
+                </div>
+            </div>
+        )
+        );
+        }
+    }
+
+
     return (
         <>
             <div className="rodape">
                 <div className="caixaEscolhido">
-                    <img src="imgs/2067.png" className="posterEscolhido" />
+                    <img src={dados.posterURL} className="posterEscolhido" />
                 </div>
                 <div className="infoEscolhido">
-                    <p>Enola Holmes</p>
-                   
+                    <p>{dados.title}</p>
+
                 </div>
             </div>
             <div className="conteudo">
                 <div className="tituloRota">Selecione o horário</div>
                 <div className="container">
-                    < div className="opcao">
-                        <p>Quinta-feira - 24/06/2021</p>
-                        <div className="horarios">
-                            <Link to="/assentos"><div className="opcaoHorario">15:00</div></Link>
-                            <Link to="/assentos"><div className="opcaoHorario">19:00</div></Link>
-                        </div>
-                    </div>
-                    < div className="opcao">
-                        <p>Quinta-feira - 24/06/2021</p>
-                        <div className="horarios">
-                            <div className="opcaoHorario">15:00</div>
-                            <div className="opcaoHorario">19:00</div>
-                        </div>
-                    </div>
-                    < div className="opcao">
-                        <p>Quinta-feira - 24/06/2021</p>
-                        <div className="horarios">
-                            <div className="opcaoHorario">15:00</div>
-                            <div className="opcaoHorario">19:00</div>
-                        </div>
-                    </div>
+
+                    {console.log(dados.days)}
+                    {mapear(dados.days)}
+
                 </div>
             </div>
         </>
