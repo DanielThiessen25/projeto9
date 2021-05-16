@@ -302,3 +302,7 @@ input {
     letter-spacing: 0.04em;
     color: #293845;
 }
+
+.link {
+    text-decoration: none;
+}

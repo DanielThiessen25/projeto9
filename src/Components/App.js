@@ -14,7 +14,7 @@ export default function App() {
                     <Route path="/" exact={true} component={Home} />
                     <Route path="/sessoes/:idFilme" exact={true} component={Sessoes} />
                     <Route path="/assentos/:idSessao" exact={true} component={Assentos} />
-                    <Route path="/sucesso" exact={true} component={Sucesso} />
+                    <Route path="/:handle" exact={true} component={Sucesso} />
                 </Switch>
 
             </div>
