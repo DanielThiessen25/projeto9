@@ -13,22 +13,16 @@ export default function Home() {
         });
     }, []);
 
-
     return (
         <div className="conteudo">
             <div className="tituloRota">Selecione o filme</div>
             <div className="container">
-
                 {filmes.map(item =>
                     <div className="caixa">
                         <Link to={"/sessoes/" + item.id}><img src={item.posterURL} className="poster" /></Link>
                     </div>
                 )}
-
             </div>
-
         </div>
-
-
     );
 }

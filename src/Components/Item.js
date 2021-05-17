@@ -1,7 +1,7 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 
-export default function Item(props){
+export default function Item(props) {
 
     const [classe, setClasse] = useState("disponivel");
 
@@ -14,25 +14,25 @@ export default function Item(props){
         }
     }
 
-    function selecionar(lugar){
-        if(lugar.isAvailable == true){
-            if(classe == "disponivel"){
+    function selecionar(lugar) {
+        if (lugar.isAvailable == true) {
+            if (classe == "disponivel") {
                 setClasse("selecionado");
                 props.acrescentar(props.item);
             }
-            else if(classe == "selecionado"){
+            else if (classe == "selecionado") {
                 setClasse("disponivel");
                 props.remover(props.item);
             }
-            
+
         }
-        else{
+        else {
             alert("Esse assento não está disponível!");
         }
     }
 
 
-    return(
+    return (
         <div className={"cadeira " + verificarCadeira(props.item.isAvailable)} onClick={() => selecionar(props.item)}>{props.item.name}</div>
     );
 }

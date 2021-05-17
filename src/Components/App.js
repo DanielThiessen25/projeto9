@@ -5,10 +5,13 @@ import Assentos from "./Assentos";
 import Sucesso from "./Sucesso";
 
 export default function App() {
+
     return (
         <BrowserRouter>
             <div className="fundo">
-                <div className="topo">CINEFLEX</div>
+                <div className="topo">
+                    CINEFLEX
+                    </div>
 
                 <Switch>
                     <Route path="/" exact={true} component={Home} />

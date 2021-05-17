@@ -6,6 +6,9 @@
     font-family: "Roboto", sans-serif;
 }
 
+.off {
+    display: none;
+}
 
 .topo {
     background: #C3CFD9;
@@ -279,7 +282,7 @@ input {
 
 .resumo {
     width: 100%;
-   padding-left: 30px;
+    padding-left: 30px;
     margin-bottom: 30px;
 }
 
@@ -305,4 +308,21 @@ input {
 
 .link {
     text-decoration: none;
+}
+
+.voltar {
+    width: 80px;
+    height: 67px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    color: #E8833A;
+}
+
+.voltar ion-icon {
+    font-size: 60px;
 }
