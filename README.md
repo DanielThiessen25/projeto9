@@ -11,6 +11,7 @@ Front-End of a movie theater's app, where we can choose a movie, make a reservat
 
 ## Technologies
 
+- Css
 - React.js
 
 ## How to run
